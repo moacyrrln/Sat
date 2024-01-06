@@ -1,4 +1,4 @@
-// Users.java (Model)
+//E:\dev\SAT/users\src\main\java\com\sat/users\model\Users.java
 package com.sat.users.model;
 
 import jakarta.persistence.Entity;
