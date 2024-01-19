@@ -7,17 +7,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserMapper {
   public UserDTO mapToDTO(Users user) {
-    UserDTO userDTO = new UserDTO();
-    userDTO.setId(user.getId());
-    userDTO.setName(user.getName());
-    userDTO.setEmail(user.getEmail());
-    return userDTO;
+    return new UserDTO(user.getId(), user.getName(), user.getEmail(), user.getCpf(), user.getPhone());
   }
 
   public Users mapToEntity(UserDTO userDTO) {
-    Users user = new Users();
-    user.setName(userDTO.getName());
-    user.setEmail(userDTO.getEmail());
-    return user;
+    return new Users(userDTO.getName(), userDTO.getEmail(), userDTO.getCpf(),
+        userDTO.getPhone());
   }
 }

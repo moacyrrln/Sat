@@ -12,44 +12,65 @@ public class Users {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long Id;
   private String name;
-
-  public Users(Long id, String name, String email) {
-    this.Id = id;
-    this.name = name;
-    this.email = email;
-  }
+  private String email;
+  private long cpf;
+  private long phone;
 
   public Users() {
   }
 
-  public Users(String name, String email) {
+  public Users(String name, String email, long cpf, long phone) {
     this.name = name;
     this.email = email;
+    this.cpf = cpf;
+    this.phone = phone;
+  }
+
+  public Users(Long id, String name, String email, long cpf, long phone) {
+    this.Id = id;
+    this.name = name;
+    this.email = email;
+    this.cpf = cpf;
+    this.phone = phone;
   }
 
   public Long getId() {
     return Id;
   }
 
-  public void setId(Long id) {
-    this.Id = id;
-  }
-
   public String getName() {
     return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
   }
 
   public String getEmail() {
     return email;
   }
 
+  public long getCpf() {
+    return cpf;
+  }
+
+  public long getPhone() {
+    return phone;
+  }
+
+  public void setId(Long id) {
+    Id = id;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
   public void setEmail(String email) {
     this.email = email;
   }
 
-  private String email;
+  public void setCpf(long cpf) {
+    this.cpf = cpf;
+  }
+
+  public void setPhone(long phone) {
+    this.phone = phone;
+  }
 }

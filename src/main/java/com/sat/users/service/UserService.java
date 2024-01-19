@@ -37,17 +37,35 @@ public class UserService {
   }
 
   public UserDTO createUser(UserDTO userDTO) {
+    validateUserDTO(userDTO);
     Users user = userMapper.mapToEntity(userDTO);
     userRepository.save(user);
     return userMapper.mapToDTO(user);
+  }
+
+  private void validateUserDTO(UserDTO userDTO) {
+    if (userDTO.getName() == null || userDTO.getName().trim().isEmpty()) {
+      throw new IllegalArgumentException("Name cannot be null or empty");
+    }
+    if (userDTO.getEmail() == null || userDTO.getEmail().trim().isEmpty()) {
+      throw new IllegalArgumentException("Email cannot be null or empty");
+    }
+    if (userDTO.getCpf() == 0) {
+      throw new IllegalArgumentException("CPF cannot be null or empty");
+    }
+    if (userDTO.getPhone() == 0) {
+      throw new IllegalArgumentException("Phone number cannot be null or empty");
+    }
   }
 
   public UserDTO updateUser(Long id, UserDTO userDTO) {
     Users existingUser = userRepository.findById(id).orElse(null);
 
     if (existingUser != null) {
-      existingUser.setName(userDTO.getName());
-      existingUser.setEmail(userDTO.getEmail());
+      if (!(userDTO.getName() == null || userDTO.getName().trim().isEmpty())) existingUser.setName(userDTO.getName());
+      if (!(userDTO.getEmail() == null || userDTO.getEmail().trim().isEmpty())) existingUser.setEmail(userDTO.getEmail());
+      existingUser.setCpf(userDTO.getCpf());
+      existingUser.setPhone(userDTO.getPhone());
       userRepository.save(existingUser);
       return userMapper.mapToDTO(existingUser);
     }
